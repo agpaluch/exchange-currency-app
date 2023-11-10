@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create_account_tables" author="paluch">
+
+        <createTable tableName="account">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="account_pkey"/>
+            </column>
+            <column name="account_number" type="VARCHAR(255)"/>
+            <column name="created_on" type="TIMESTAMP"/>
+            <column name="account_balance_id" type="BIGINT"/>
+            <column name="customer_id" type="BIGINT"/>
+        </createTable>
+
+        <createTable tableName="account_balance">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="account_balance_pkey"/>
+            </column>
+            <column name="pln_balance" type="NUMERIC"/>
+            <column name="usd_balance" type="NUMERIC"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="account" baseColumnNames="customer_id"
+                                 constraintName="account_customer_fkey"
+                                 referencedTableName="customer"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="account" baseColumnNames="account_balance_id"
+                                 constraintName="account_account_balance_fkey"
+                                 referencedTableName="account_balance"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+
+</databaseChangeLog>
