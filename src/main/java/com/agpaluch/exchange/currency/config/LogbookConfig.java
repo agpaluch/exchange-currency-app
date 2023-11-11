@@ -17,7 +17,9 @@ public class LogbookConfig {
     Logbook logbook() {
         return Logbook.builder()
                 .sink(new DefaultSink(new DefaultHttpLogFormatter(), new DefaultHttpLogWriter()))
-                .condition(exclude(requestTo("**health/**")))
+                .condition(exclude(
+                        requestTo("**health/**"),
+                        requestTo("**/swagger-ui/**")))
                 .build();
     }
 
