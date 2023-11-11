@@ -15,5 +15,16 @@ spring:
     console:
       enabled: true
 
+integration:
+  nbp:
+    base-url: "http://api.nbp.pl/api/exchangerates/rates"
+    timeout:
+      connect: 1s
+      response: 1s
 
-
+logging:
+  level:
+    org:
+      zalando:
+        logbook:
+          Logbook: TRACE
