@@ -1,20 +1,23 @@
 package com.agpaluch.exchange.currency.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
 
 @Entity
+@Builder
 @Getter
 @Setter
-public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+@AllArgsConstructor
+@NoArgsConstructor
+public class Account extends AbstractEntity {
+
     private String accountNumber;
 
     @CreatedDate //TODO????
