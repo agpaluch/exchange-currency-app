@@ -2,25 +2,29 @@ package com.agpaluch.exchange.currency.service;
 
 import com.agpaluch.exchange.currency.entities.AccountBalance;
 import com.agpaluch.exchange.currency.exceptions.InvalidBalanceException;
+import com.agpaluch.exchange.currency.mapper.AccountBalanceMapper;
+import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
 
-import java.math.BigDecimal;
 
 public class AccountBalanceFactory {
 
+    private AccountBalanceMapper accountBalanceMapper = new AccountBalanceMapperImpl();
+
     public static AccountBalance createAccountBalance(CreateAccountDTO createAccountDto) throws InvalidBalanceException {
-        return AccountBalance.builder()
-                .plnBalance(getInitialBalancePln(createAccountDto))
-                .build();
-    }
+        AccountBalanceDTO initialBalance = createAccountDto.getInitialBalance();
 
-    private static BigDecimal getInitialBalancePln(CreateAccountDTO createAccountDto) throws InvalidBalanceException {
-        double initialBalancePln = createAccountDto.getInitialBalancePln();
-
-        if (initialBalancePln <= 0) {
-            throw new InvalidBalanceException("Initial PLN balance must be a positive number.");
+        if (initialBalance == null || initialBalance.getCurrencyCode() == null || initialBalance.getBalance() == null) {
+            throw new InvalidBalanceException("Initial balance must be provided.");
         }
 
-        return BigDecimal.valueOf(initialBalancePln);
+        double initialBalanceValue = initialBalance.getBalance();
+
+        if (initialBalanceValue <= 0) {
+            throw new InvalidBalanceException("Initial PLN balance must be a positive number.");
+        }
+        return null;
+
+        //return accountBalanceMapper.map(initialBalance);
     }
 }

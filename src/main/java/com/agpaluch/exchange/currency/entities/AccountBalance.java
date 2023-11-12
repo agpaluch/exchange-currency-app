@@ -13,6 +13,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class AccountBalance extends AbstractEntity {
 
-    private BigDecimal plnBalance;
-    private BigDecimal usdBalance;
+    private CurrencyCode currencyCode;
+    private BigDecimal balance;
 }

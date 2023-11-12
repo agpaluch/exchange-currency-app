@@ -23,7 +23,7 @@ public class CreateAccountService {
     public AccountCreatedDTO createAccount(CreateAccountDTO createAccountDto) throws InvalidBalanceException {
 
         AccountBalance accountBalance = AccountBalanceFactory.createAccountBalance(createAccountDto);
-        Account account = AccountFactory.createAccount(accountBalance);
+        Account account = AccountFactory.createAccount(Collections.singletonList(accountBalance));
         Customer customer = CustomerFactory.createCustomer(createAccountDto, Collections.singletonList(account));
 
         customerRepository.save(customer);

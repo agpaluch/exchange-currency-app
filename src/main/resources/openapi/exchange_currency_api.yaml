@@ -30,6 +30,26 @@ paths:
           description: Invalid request body supplied
         '422':
           description: Request body contains errors
+  /exchangeCurrency: #/{accountNumber}/{currencyCode}:
+    patch:
+      summary: exchange one currency for another
+      operationId: exchangeCurrency
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccount'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCreated'
+        '400':
+          description: Invalid request body supplied
+        '422':
+          description: Request body contains errors
 components:
   schemas:
     CreateAccount:
@@ -37,13 +57,30 @@ components:
       properties:
         firstName:
           type: string
+          nullable: false
         lastName:
           type: string
-        initialBalancePln:
-          type: number
-          format: double
+          nullable: false
+        initialBalance:
+          nullable: false
+          $ref: '#/components/schemas/AccountBalance'
     AccountCreated:
       type: object
       properties:
         accountNumber:
           type: string
+    AccountBalance:
+      type: object
+      properties:
+        currencyCode:
+          nullable: false
+          $ref: '#/components/schemas/CurrencyCode'
+        balance:
+          type: number
+          format: double
+          nullable: false
+    CurrencyCode:
+      type: string
+      enum:
+        - USD
+        - PLN

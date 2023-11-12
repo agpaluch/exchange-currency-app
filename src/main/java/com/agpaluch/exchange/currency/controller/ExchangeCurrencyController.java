@@ -19,4 +19,12 @@ public class ExchangeCurrencyController implements CreateAccountApi {
         return ResponseEntity.ok(createAccountService.createAccount(createAccountDto));
     }
 
+/*    //@Override
+    @PatchMapping
+    public ResponseEntity<AccountCreatedDTO> exchangeForUSD(@RequestParam String accountNumber, @RequestParam currencyCode,
+                                                            @RequestBody Double amountToExchange) {
+
+    }
+*/
+
 }
