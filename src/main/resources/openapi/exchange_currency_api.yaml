@@ -7,8 +7,10 @@ info:
 servers:
   - url: /exchangeCurrency/swagger-ui/index.html
 tags:
+  - name: createAccount
+    description: create account
   - name: exchangeCurrency
-    description: create account and exchange currencies
+    description: exchange currencies
 paths:
   /createAccount:
     post:
@@ -27,42 +29,62 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccountCreated'
         '400':
-          description: Invalid request body supplied
+          description: Bad request body supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '422':
-          description: Request body contains errors
-  /exchangeCurrency: #/{accountNumber}/{currencyCode}:
-    patch:
+          description: Request cannot be processed due to errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /exchange:
+    post:
       summary: exchange one currency for another
       operationId: exchangeCurrency
+      parameters:
+        - name: accountNumber
+          in: query
+          description: account number
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAccount'
+              $ref: '#/components/schemas/ExchangeCurrency'
       responses:
-        '200':
+        '201':
           description: Successful operation
+        '400':
+          description: Bad request body supplied
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountCreated'
-        '400':
-          description: Invalid request body supplied
+                $ref: '#/components/schemas/Error'
         '422':
-          description: Request body contains errors
+          description: Request cannot be processed due to errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     CreateAccount:
       type: object
+      required:
+        - firstName
+        - lastName
+        - initialBalance
       properties:
         firstName:
           type: string
-          nullable: false
         lastName:
           type: string
-          nullable: false
         initialBalance:
-          nullable: false
           $ref: '#/components/schemas/AccountBalance'
     AccountCreated:
       type: object
@@ -71,16 +93,39 @@ components:
           type: string
     AccountBalance:
       type: object
+      required:
+        - currencyCode
+        - balance
       properties:
         currencyCode:
-          nullable: false
           $ref: '#/components/schemas/CurrencyCode'
         balance:
           type: number
-          format: double
-          nullable: false
+          format: decimal
+    ExchangeCurrency:
+      type: object
+      required:
+        - sourceCurrencyCode
+        - targetCurrencyCode
+        - amountSourceCurrency
+      properties:
+        sourceCurrencyCode:
+          $ref: '#/components/schemas/CurrencyCode'
+        targetCurrencyCode:
+          $ref: '#/components/schemas/CurrencyCode'
+        amountSourceCurrency:
+          type: number
+          format: decimal
     CurrencyCode:
       type: string
       enum:
         - USD
         - PLN
+    Error:
+      type: object
+      required:
+        - errorMessage
+      properties:
+        errorMessage:
+          type: string
+

@@ -1,0 +1,11 @@
+name: exchange_currency
+services:
+  postgres:
+    container_name: exchange_currency_postgres
+    image: "postgres:14.2"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=username
+      - POSTGRES_DB=exchange_currency_db

@@ -9,8 +9,9 @@ import java.util.UUID;
 public class AccountFactory {
 
     public static Account createAccount(List<AccountBalance> accountBalance) {
+
         return Account.builder()
-                .accountBalance(accountBalance)
+                .accountBalances(accountBalance)
                 .accountNumber(UUID.randomUUID().toString())
                 .build();
     }

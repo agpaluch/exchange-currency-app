@@ -1,6 +1,10 @@
 package com.agpaluch.exchange.currency.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,9 +1,12 @@
 package com.agpaluch.exchange.currency.service;
 
 import com.agpaluch.exchange.currency.MvcTestUtils;
+import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
+import com.agpaluch.exchange.currency.model.CurrencyCodeDTO;
 import com.agpaluch.exchange.currency.persistence.AccountRepository;
 import com.agpaluch.exchange.currency.persistence.CustomerRepository;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureEmbeddedDatabase(type = AutoConfigureEmbeddedDatabase.DatabaseType.POSTGRES)
 class CreateAccountServiceIT {
 
     @Autowired
@@ -37,29 +42,37 @@ class CreateAccountServiceIT {
     private static Stream<Arguments> provideCreateAccountDtoWithInvalidInitialPlnBalance() {
         return Stream.of(
                 Arguments.of(new CreateAccountDTO()
-                                .firstName("testFirstName")
-                                .lastName("testLastName")
-                                .initialBalancePln(-10.20),
-                        Arguments.of(new CreateAccountDTO()
-                                .firstName("testFirstName")
-                                .lastName("testLastName")
-                                .initialBalancePln(0.0))
-                ));
+                        .firstName("testFirstName")
+                        .lastName("testLastName")
+                        .initialBalance(new AccountBalanceDTO().balance(BigDecimal.valueOf(-10.20)).currencyCode(CurrencyCodeDTO.PLN))),
+                Arguments.of(new CreateAccountDTO()
+                        .firstName("testFirstName")
+                        .lastName("testLastName")
+                        .initialBalance(new AccountBalanceDTO().balance(BigDecimal.valueOf(0.0)).currencyCode(CurrencyCodeDTO.PLN))),
+                Arguments.of(new CreateAccountDTO()
+                        .firstName("testFirstName")
+                        .lastName("testLastName")
+                        .initialBalance(new AccountBalanceDTO().balance(BigDecimal.valueOf(10.0)).currencyCode(CurrencyCodeDTO.USD)))
+        );
     }
 
     private static Stream<Arguments> provideInvalidCreateAccountDto() {
         return Stream.of(
                 Arguments.of(new CreateAccountDTO()
                         .lastName("testLastName")
-                        .initialBalancePln(100.10)),
+                        .initialBalance(new AccountBalanceDTO().balance(BigDecimal.valueOf(100.00)).currencyCode(CurrencyCodeDTO.PLN))),
                 Arguments.of(new CreateAccountDTO()
                         .firstName("testFirstName")
                         .lastName(null)
-                        .initialBalancePln(100.10)),
+                        .initialBalance(new AccountBalanceDTO().balance(BigDecimal.valueOf(100.00)).currencyCode(CurrencyCodeDTO.PLN))),
                 Arguments.of(new CreateAccountDTO()
                         .firstName("testFirstName")
                         .lastName("testLastName")
-                        .initialBalancePln(null))
+                        .initialBalance(null)),
+                Arguments.of(new CreateAccountDTO()
+                        .firstName("testFirstName")
+                        .lastName(null)
+                        .initialBalance(new AccountBalanceDTO().balance(null).currencyCode(CurrencyCodeDTO.PLN)))
         );
     }
 
@@ -69,7 +82,7 @@ class CreateAccountServiceIT {
         CreateAccountDTO createAccountDto = new CreateAccountDTO()
                 .firstName("testName")
                 .lastName("lastName")
-                .initialBalancePln(100.10);
+                .initialBalance(new AccountBalanceDTO().balance(BigDecimal.valueOf(100.00)).currencyCode(CurrencyCodeDTO.PLN));
 
         //when
         ResultActions resultActions = mockMvc.perform(post("/createAccount")
@@ -101,6 +114,7 @@ class CreateAccountServiceIT {
 
         //then
         resultActions.andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.errorMessage").isNotEmpty())
                 .andReturn();
     }
 
@@ -114,6 +128,7 @@ class CreateAccountServiceIT {
 
         //then
         resultActions.andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMessage").isNotEmpty())
                 .andReturn();
     }
 

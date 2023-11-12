@@ -19,6 +19,7 @@
         <java.version>11</java.version>
         <liquibase.version>4.24.0</liquibase.version>
         <logbook.version>3.6.0</logbook.version>
+        <zonky.version>2.3.0</zonky.version>
         <assertj.version>3.24.2</assertj.version>
         <openapi.version>7.0.1</openapi.version>
         <springdoc.openapi.version>1.7.0</springdoc.openapi.version>
@@ -47,8 +48,8 @@
 
         <!--persistence-->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -88,6 +89,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.zonky.test</groupId>
+            <artifactId>embedded-database-spring-test</artifactId>
+            <version>${zonky.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -160,6 +167,7 @@
                                 <interfaceOnly>true</interfaceOnly>
                                 <unhandledException>true</unhandledException>
                                 <useBeanValidation>true</useBeanValidation>
+                                <performBeanValidation>true</performBeanValidation>
                             </configOptions>
                         </configuration>
                     </execution>
