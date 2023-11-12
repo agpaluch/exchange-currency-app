@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: Exchange Currency API
+  description: |-
+    ** Exchange Currency API **
+  version: 1.0.0
+servers:
+  - url: /exchangeCurrency/swagger-ui/index.html
+tags:
+  - name: exchangeCurrency
+    description: create account and exchange currencies
+paths:
+  /createAccount:
+    post:
+      summary: creates currency exchange account
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccount'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCreated'
+        '400':
+          description: Invalid request body supplied
+        '422':
+          description: Request body contains errors
+components:
+  schemas:
+    CreateAccount:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        initialBalancePln:
+          type: number
+          format: double
+    AccountCreated:
+      type: object
+      properties:
+        accountNumber:
+          type: string
