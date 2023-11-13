@@ -34,7 +34,4 @@ public class Account extends AbstractEntity {
         accountBalances.add(accountBalance);
     }
 
-    public void removeBalance(AccountBalance accountBalance) {
-        accountBalances.remove(accountBalance);
-    }
 }
