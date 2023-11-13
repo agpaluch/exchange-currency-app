@@ -7,10 +7,7 @@ info:
 servers:
   - url: /exchangeCurrency/swagger-ui/index.html
 tags:
-  - name: createAccount
-    description: create account
-  - name: exchangeCurrency
-    description: exchange currencies
+  - name: exchange currency API
 paths:
   /createAccount:
     post:
@@ -67,6 +64,32 @@ paths:
                 $ref: '#/components/schemas/Error'
         '422':
           description: Request cannot be processed due to errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /accountBalance:
+    get:
+      summary: get account balances
+      operationId: getAccountBalance
+      parameters:
+        - name: accountNumber
+          in: query
+          description: account number
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBalance'
+        '404':
+          description: Account not found
           content:
             application/json:
               schema:

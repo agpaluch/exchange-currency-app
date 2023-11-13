@@ -10,6 +10,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByAccountNumber(String accountNumber);
 
     @Query("select account from Account account " +
-            "join fetch account.accountBalances accountBalances")
+            "join fetch account.accountBalances accountBalances " +
+            "where account.accountNumber like :accountNumber")
     Optional<Account> findByAccountNumberFetchAccountBalances(String accountNumber);
 }
