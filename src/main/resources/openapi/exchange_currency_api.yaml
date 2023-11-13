@@ -6,8 +6,6 @@ info:
   version: 1.0.0
 servers:
   - url: /exchangeCurrency/swagger-ui/index.html
-tags:
-  - name: exchange currency API
 paths:
   /createAccount:
     post:
