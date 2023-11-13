@@ -14,8 +14,10 @@ public interface AccountBalanceMapper {
 
     AccountBalance map(AccountBalanceDTO accountBalanceDTO);
 
-    default List<AccountBalance> map(List<AccountBalanceDTO> accountBalanceDTO) {
-        return accountBalanceDTO.stream().map(this::map).collect(Collectors.toList());
+    AccountBalanceDTO map(AccountBalance accountBalance);
+
+    default List<AccountBalanceDTO> map(List<AccountBalance> accountBalance) {
+        return accountBalance.stream().map(this::map).collect(Collectors.toList());
     }
 
 }
