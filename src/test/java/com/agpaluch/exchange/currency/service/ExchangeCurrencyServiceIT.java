@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -81,7 +81,7 @@ class ExchangeCurrencyServiceIT {
                 .amountSourceCurrency(amountSourceCurrency);
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/exchange")
+        ResultActions resultActions = mockMvc.perform(patch("/exchange")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("accountNumber", accountNumber)
                 .content(MvcTestUtils.asJson(exchangeCurrencyDTO)));
@@ -121,7 +121,7 @@ class ExchangeCurrencyServiceIT {
                 .amountSourceCurrency(amountSourceCurrency);
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/exchange")
+        ResultActions resultActions = mockMvc.perform(patch("/exchange")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("accountNumber", accountNumber)
                 .content(MvcTestUtils.asJson(exchangeCurrencyDTO)));
@@ -157,7 +157,7 @@ class ExchangeCurrencyServiceIT {
                 .amountSourceCurrency(amountSourceCurrency);
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/exchange")
+        ResultActions resultActions = mockMvc.perform(patch("/exchange")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("accountNumber", accountNumber)
                 .content(MvcTestUtils.asJson(exchangeCurrencyDTO)));
@@ -186,7 +186,7 @@ class ExchangeCurrencyServiceIT {
                 .amountSourceCurrency(amountSourceCurrency);
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/exchange")
+        ResultActions resultActions = mockMvc.perform(patch("/exchange")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("accountNumber", accountNumber)
                 .content(MvcTestUtils.asJson(exchangeCurrencyDTO)));
@@ -207,7 +207,7 @@ class ExchangeCurrencyServiceIT {
                 .amountSourceCurrency(amountSourceCurrency);
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/exchange")
+        ResultActions resultActions = mockMvc.perform(patch("/exchange")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("accountNumber", "nonExistingAccountNumber")
                 .content(MvcTestUtils.asJson(exchangeCurrencyDTO)));
@@ -233,7 +233,7 @@ class ExchangeCurrencyServiceIT {
                 .amountSourceCurrency(amountSourceCurrency);
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/exchange")
+        ResultActions resultActions = mockMvc.perform(patch("/exchange")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("accountNumber", accountNumber)
                 .content(MvcTestUtils.asJson(exchangeCurrencyDTO)));
