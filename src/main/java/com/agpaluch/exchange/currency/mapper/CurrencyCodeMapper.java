@@ -1,6 +1,6 @@
 package com.agpaluch.exchange.currency.mapper;
 
-import com.agpaluch.exchange.currency.entities.CurrencyCode;
+import com.agpaluch.exchange.currency.entity.CurrencyCode;
 import com.agpaluch.exchange.currency.model.CurrencyCodeDTO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;

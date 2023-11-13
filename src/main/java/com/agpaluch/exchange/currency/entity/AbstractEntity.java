@@ -1,4 +1,4 @@
-package com.agpaluch.exchange.currency.entities;
+package com.agpaluch.exchange.currency.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

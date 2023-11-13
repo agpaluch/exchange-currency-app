@@ -1,7 +1,7 @@
 package com.agpaluch.exchange.currency.mapper;
 
 
-import com.agpaluch.exchange.currency.entities.AccountBalance;
+import com.agpaluch.exchange.currency.entity.AccountBalance;
 import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;

@@ -1,7 +1,7 @@
 package com.agpaluch.exchange.currency.service;
 
-import com.agpaluch.exchange.currency.entities.Account;
-import com.agpaluch.exchange.currency.entities.Customer;
+import com.agpaluch.exchange.currency.entity.Account;
+import com.agpaluch.exchange.currency.entity.Customer;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
 
 import java.util.List;
