@@ -1,29 +1,40 @@
 package com.agpaluch.exchange.currency.entities;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Account extends AbstractEntity {
 
     private String accountNumber;
 
-    @CreatedDate //TODO????
-    private LocalDateTime createdOn;
+    @CreatedDate
+    private LocalDateTime createdDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_balance_id", referencedColumnName = "id")
-    private AccountBalance accountBalance;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    @Singular("accountBalance")
+    private List<AccountBalance> accountBalances = new ArrayList<>();
+
+    public void addAccountBalance(AccountBalance accountBalance) {
+        accountBalances.add(accountBalance);
+    }
+
+    public void removeBalance(AccountBalance accountBalance) {
+        accountBalances.remove(accountBalance);
+    }
 }

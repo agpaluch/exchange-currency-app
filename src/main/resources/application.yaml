@@ -5,10 +5,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:memdb
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    username: username
+    password: password
+    url: jdbc:postgresql://localhost:5432/exchange_currency_db
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
@@ -16,9 +16,6 @@ spring:
     change-log: classpath:/db/migration/db.changelog.master.xml
   flyway:
     enabled: false
-  h2:
-    console:
-      enabled: true
 
 integration:
   nbp:

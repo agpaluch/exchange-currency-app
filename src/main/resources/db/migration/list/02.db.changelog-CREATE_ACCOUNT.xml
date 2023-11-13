@@ -12,8 +12,7 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="account_pkey"/>
             </column>
             <column name="account_number" type="VARCHAR(255)"/>
-            <column name="created_on" type="TIMESTAMP"/>
-            <column name="account_balance_id" type="BIGINT"/>
+            <column name="created_date" type="TIMESTAMP"/>
             <column name="customer_id" type="BIGINT"/>
         </createTable>
 
@@ -21,8 +20,9 @@
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="account_balance_pkey"/>
             </column>
-            <column name="pln_balance" type="NUMERIC"/>
-            <column name="usd_balance" type="NUMERIC"/>
+            <column name="currency_code" type="VARCHAR(255)"/>
+            <column name="balance" type="NUMERIC"/>
+            <column name="account_id" type="BIGINT"/>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="account" baseColumnNames="customer_id"
@@ -30,9 +30,9 @@
                                  referencedTableName="customer"
                                  referencedColumnNames="id"/>
 
-        <addForeignKeyConstraint baseTableName="account" baseColumnNames="account_balance_id"
-                                 constraintName="account_account_balance_fkey"
-                                 referencedTableName="account_balance"
+        <addForeignKeyConstraint baseTableName="account_balance" baseColumnNames="account_id"
+                                 constraintName="account_balance_account_fkey"
+                                 referencedTableName="account"
                                  referencedColumnNames="id"/>
 
     </changeSet>

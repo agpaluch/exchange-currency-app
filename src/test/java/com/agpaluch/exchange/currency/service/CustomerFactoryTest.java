@@ -2,8 +2,11 @@ package com.agpaluch.exchange.currency.service;
 
 import com.agpaluch.exchange.currency.entities.Account;
 import com.agpaluch.exchange.currency.entities.AccountBalance;
+import com.agpaluch.exchange.currency.entities.CurrencyCode;
 import com.agpaluch.exchange.currency.entities.Customer;
+import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
+import com.agpaluch.exchange.currency.model.CurrencyCodeDTO;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -16,13 +19,17 @@ class CustomerFactoryTest {
     @Test
     void createCustomer_createsCustomer_withAccount() {
         //given
+        BigDecimal initialBalanceValue = BigDecimal.valueOf(13.4);
         CreateAccountDTO createAccountDto = new CreateAccountDTO()
                 .firstName("testFirstName")
                 .lastName("testLastName")
-                .initialBalancePln(13.4);
+                .initialBalance(new AccountBalanceDTO().currencyCode(CurrencyCodeDTO.PLN).balance(initialBalanceValue));
 
         Account account = Account.builder()
-                .accountBalance(AccountBalance.builder().plnBalance(BigDecimal.valueOf(10.98)).build())
+                .accountBalance(AccountBalance.builder()
+                        .currencyCode(CurrencyCode.PLN)
+                        .balance(initialBalanceValue)
+                        .build())
                 .build();
 
         //when

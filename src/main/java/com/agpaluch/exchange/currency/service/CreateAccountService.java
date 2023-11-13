@@ -9,11 +9,13 @@ import com.agpaluch.exchange.currency.model.AccountCreatedDTO;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
 import com.agpaluch.exchange.currency.persistence.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CreateAccountService {
 
@@ -22,13 +24,19 @@ public class CreateAccountService {
 
     public AccountCreatedDTO createAccount(CreateAccountDTO createAccountDto) throws InvalidBalanceException {
 
-        AccountBalance accountBalance = AccountBalanceFactory.createAccountBalance(createAccountDto);
-        Account account = AccountFactory.createAccount(accountBalance);
+        AccountBalanceValidator.validateInitialBalance(createAccountDto);
+
+        AccountBalance accountBalance = AccountBalanceFactory.createInitialPLNBalance(createAccountDto);
+        Account account = AccountFactory.createAccount(Collections.singletonList(accountBalance));
         Customer customer = CustomerFactory.createCustomer(createAccountDto, Collections.singletonList(account));
 
         customerRepository.save(customer);
 
-        return new AccountCreatedDTO().accountNumber(account.getAccountNumber());
+        String accountNumber = account.getAccountNumber();
+
+        log.info("Account with number {} was created.", accountNumber);
+
+        return new AccountCreatedDTO().accountNumber(accountNumber);
     }
 
 }

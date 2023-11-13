@@ -1,18 +1,27 @@
 package com.agpaluch.exchange.currency.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.math.BigDecimal;
 
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountBalance extends AbstractEntity {
 
-    private BigDecimal plnBalance;
-    private BigDecimal usdBalance;
+    @Enumerated(EnumType.STRING)
+    private CurrencyCode currencyCode;
+    @Column(scale = 4, precision = 30)
+    private BigDecimal balance;
 }
