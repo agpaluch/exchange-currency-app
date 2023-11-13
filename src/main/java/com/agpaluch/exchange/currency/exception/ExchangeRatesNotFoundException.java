@@ -1,4 +1,4 @@
-package com.agpaluch.exchange.currency.exceptions;
+package com.agpaluch.exchange.currency.exception;
 
 public class ExchangeRatesNotFoundException extends Exception {
 

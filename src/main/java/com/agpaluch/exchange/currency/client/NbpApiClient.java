@@ -2,7 +2,7 @@ package com.agpaluch.exchange.currency.client;
 
 import com.agpaluch.exchange.currency.config.IntegrationProperties;
 import com.agpaluch.exchange.currency.config.RestTemplateFactory;
-import com.agpaluch.exchange.currency.exceptions.ExchangeRatesNotFoundException;
+import com.agpaluch.exchange.currency.exception.ExchangeRatesNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

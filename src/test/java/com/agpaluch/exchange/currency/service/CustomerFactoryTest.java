@@ -1,9 +1,9 @@
 package com.agpaluch.exchange.currency.service;
 
-import com.agpaluch.exchange.currency.entities.Account;
-import com.agpaluch.exchange.currency.entities.AccountBalance;
-import com.agpaluch.exchange.currency.entities.CurrencyCode;
-import com.agpaluch.exchange.currency.entities.Customer;
+import com.agpaluch.exchange.currency.entity.Account;
+import com.agpaluch.exchange.currency.entity.AccountBalance;
+import com.agpaluch.exchange.currency.entity.CurrencyCode;
+import com.agpaluch.exchange.currency.entity.Customer;
 import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
 import com.agpaluch.exchange.currency.model.CurrencyCodeDTO;

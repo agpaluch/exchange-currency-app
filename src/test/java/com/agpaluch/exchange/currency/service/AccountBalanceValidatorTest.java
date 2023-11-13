@@ -1,6 +1,6 @@
 package com.agpaluch.exchange.currency.service;
 
-import com.agpaluch.exchange.currency.exceptions.InvalidBalanceException;
+import com.agpaluch.exchange.currency.exception.InvalidBalanceException;
 import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import com.agpaluch.exchange.currency.model.CreateAccountDTO;
 import com.agpaluch.exchange.currency.model.CurrencyCodeDTO;

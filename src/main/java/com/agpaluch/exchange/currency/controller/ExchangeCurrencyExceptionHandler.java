@@ -1,9 +1,9 @@
 package com.agpaluch.exchange.currency.controller;
 
 
-import com.agpaluch.exchange.currency.exceptions.AccountNotFoundException;
-import com.agpaluch.exchange.currency.exceptions.ExchangeRatesNotFoundException;
-import com.agpaluch.exchange.currency.exceptions.InvalidBalanceException;
+import com.agpaluch.exchange.currency.exception.AccountNotFoundException;
+import com.agpaluch.exchange.currency.exception.ExchangeRatesNotFoundException;
+import com.agpaluch.exchange.currency.exception.InvalidBalanceException;
 import com.agpaluch.exchange.currency.model.ErrorDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

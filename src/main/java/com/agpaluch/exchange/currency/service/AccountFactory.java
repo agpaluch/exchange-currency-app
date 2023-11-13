@@ -1,7 +1,7 @@
 package com.agpaluch.exchange.currency.service;
 
-import com.agpaluch.exchange.currency.entities.Account;
-import com.agpaluch.exchange.currency.entities.AccountBalance;
+import com.agpaluch.exchange.currency.entity.Account;
+import com.agpaluch.exchange.currency.entity.AccountBalance;
 
 import java.util.List;
 import java.util.UUID;

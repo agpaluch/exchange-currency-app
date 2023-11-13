@@ -1,6 +1,6 @@
 package com.agpaluch.exchange.currency.service;
 
-import com.agpaluch.exchange.currency.entities.AccountBalance;
+import com.agpaluch.exchange.currency.entity.AccountBalance;
 import com.agpaluch.exchange.currency.mapper.AccountBalanceMapper;
 import com.agpaluch.exchange.currency.mapper.AccountBalanceMapperImpl;
 import com.agpaluch.exchange.currency.mapper.CurrencyCodeMapper;

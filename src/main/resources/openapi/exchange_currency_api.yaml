@@ -7,12 +7,16 @@ info:
 servers:
   - url: /exchangeCurrency/swagger-ui/index.html
 tags:
-  - name: exchange currency API
+  - name: exchangeCurrency
+    description: API for creating currency account and exchanging currency
 paths:
   /createAccount:
     post:
-      summary: creates currency exchange account
       operationId: createAccount
+      summary: 'creates currency exchange account'
+      description: 'creates currency exchange account'
+      tags:
+        - exchangeCurrency
       requestBody:
         content:
           application/json:
@@ -38,9 +42,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   /exchange:
-    post:
-      summary: exchange one currency for another
+    patch:
       operationId: exchangeCurrency
+      summary: 'exchange one currency for another'
+      description: 'exchange one currency for another'
+      tags:
+        - exchangeCurrency
       parameters:
         - name: accountNumber
           in: query
@@ -70,8 +77,11 @@ paths:
                 $ref: '#/components/schemas/Error'
   /accountBalance:
     get:
-      summary: get account balances
       operationId: getAccountBalance
+      summary: 'get account balances'
+      description: 'get account balances'
+      tags:
+        - exchangeCurrency
       parameters:
         - name: accountNumber
           in: query

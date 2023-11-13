@@ -1,7 +1,7 @@
 package com.agpaluch.exchange.currency.service;
 
-import com.agpaluch.exchange.currency.entities.Account;
-import com.agpaluch.exchange.currency.exceptions.AccountNotFoundException;
+import com.agpaluch.exchange.currency.entity.Account;
+import com.agpaluch.exchange.currency.exception.AccountNotFoundException;
 import com.agpaluch.exchange.currency.mapper.AccountBalanceMapper;
 import com.agpaluch.exchange.currency.model.AccountBalanceDTO;
 import com.agpaluch.exchange.currency.persistence.AccountRepository;
