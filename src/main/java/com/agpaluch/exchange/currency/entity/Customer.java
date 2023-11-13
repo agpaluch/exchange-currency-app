@@ -26,7 +26,6 @@ public class Customer extends AbstractEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "customer_id")
-    //@JoinColumn needed so that Hibernate does not create third table with pairs of keys
     private List<Account> accounts = new ArrayList<>();
 
 }

@@ -25,3 +25,4 @@ in the same versions.
 Currently the business logic in services is simple so adding facade would be unnecessary complication. 
 8. E2E tests e.g. using wiremock library.
 9. More currencies than just PLN and USD.
+10. Enable deleting account.
