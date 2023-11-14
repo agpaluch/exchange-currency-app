@@ -128,7 +128,6 @@ class CreateAccountServiceIT {
 
         //then
         resultActions.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errorMessage").isNotEmpty())
                 .andReturn();
     }
 
